@@ -15,7 +15,7 @@ Legenda: `[ ]` da fare · `[~]` in corso · `[x]` fatto
 - [ ] Schede Python 01-04 (docs/python) lette e provate
 - [x] es01 · Stringhe, funzioni, eccezioni: parsing di importi e date italiane (2026-09-26)
 - [x] es02 · Liste e dizionari: leggere un CSV e sommare per categoria (2026-09-26)
-- [ ] es03 · Gestione errori e logging: righe malformate
+- [x] es03 · Gestione errori e logging: righe malformate (2026-09-26)
 - [ ] es04 · Dataclass: una `Transaction` con validazione
 - [ ] es05 · Scrivere output: report mensile in JSON e CSV, CLI con argparse
 - [ ] es06 · Mini progetto: due estratti conto in formati diversi → uno schema comune

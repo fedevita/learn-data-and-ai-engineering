@@ -22,6 +22,7 @@ completo: copre le parti che un data engineer usa ogni giorno, con esempi da pro
 5. [Controllo di flusso e funzioni](05-flusso-e-funzioni.md)
 6. [Errori ed eccezioni](06-errori-ed-eccezioni.md)
 7. [Moduli, file e libreria standard](07-moduli-file-e-libreria-standard.md)
+8. [Classi e dataclass](08-classi-e-dataclass.md)
 
 ## Fonti ufficiali (in italiano)
 

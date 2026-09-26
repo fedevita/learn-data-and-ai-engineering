@@ -12,6 +12,7 @@ in italiano, con esempi da provare nel REPL o in `playground/prove.py`.
 - Prima di es02: schede 01 (come esplorare un oggetto), 02 (tipi base), 03 (liste),
   04 (dizionari).
 - Prima di es03: schede 06 (errori) e 07 (moduli e file).
+- Prima di es04: scheda 08 (classi e dataclass).
 - Scheda 05 (funzioni) quando vuoi capire meglio quello che stai già scrivendo.
 
 Il tutorial ufficiale in italiano (https://docs.python.org/it/3/tutorial/) resta il riferimento
@@ -144,8 +145,43 @@ Concetti che servono (schede 06 e 07):
 - **Il tipo `dict[str, str | float]`** è scomodo: `row["amount"]` è float o stringa? Dipende da
   quale funzione l'ha prodotta. È il problema che risolve la dataclass di es04.
 
+## es04 · Una `Transaction` tipizzata: dataclass e validazione (45-60 min)
+
+Finora una transazione è un dizionario, e ogni funzione deve fidarsi che dentro ci siano le
+chiavi giuste con i tipi giusti: `row["amount"]` è una stringa o un float? Dipende da chi l'ha
+prodotto. Una **dataclass** è un dizionario con le chiavi decise una volta per tutte, tipizzate e
+validate alla creazione: da qui in poi il resto del codice riceve `Transaction`, non "un dict e
+speriamo bene". È lo schema dei dati, scritto in Python.
+
+Da completare in `es04_transaction.py`:
+
+- I quattro **campi** di `Transaction`: `date`, `description`, `amount`, `category` (con default
+  `UNCATEGORIZED`). Sono righe della classe, con il tipo: guarda la scheda 08.
+- `__post_init__` · valida: `description` e `category` non possono essere vuote o di soli spazi,
+  altrimenti `ValueError`.
+- `month` · una `@property`: `"2025-01-02"` → `"2025-01"`. Servirà per il report mensile di es05.
+- `Transaction.from_row(row)` · un `@classmethod` che costruisce una `Transaction` da una riga
+  grezza del CSV, riusando `clean_transaction` di es03.
+- `load_transactions(path)` · legge il CSV (es02), costruisce le `Transaction` e salta le righe
+  non valide con un warning, come in es03.
+
+Concetti che servono (scheda 08):
+
+- **`@dataclass`** genera per te `__init__`, `__repr__` (la stampa leggibile) e `__eq__` (il
+  confronto campo per campo) a partire dai campi dichiarati. `frozen=True` rende l'oggetto
+  immutabile: modificare un campo solleva `FrozenInstanceError`. Ti ricorda la review di es03?
+- **`__post_init__`** gira da solo alla fine della costruzione: è il posto per i controlli.
+- **`@property`** trasforma un metodo in un attributo calcolato: `t.month`, senza parentesi.
+- **`@classmethod`** riceve la classe (`cls`) invece dell'oggetto: è il modo standard per avere
+  costruttori alternativi (`Transaction.from_row(...)`). Dentro, `cls(...)` crea l'oggetto.
+- **Spacchettare con `**`:** `Transaction(**d)` equivale a
+  `Transaction(date=d["date"], description=d["description"], ...)`. Guarda come lo usano i test.
+
+Domanda su cui riflettere (ne parliamo in review): `date` è ancora una stringa. Cosa
+guadagneresti con `datetime.date`? Prova nel REPL: `from datetime import date`,
+`d = date.fromisoformat("2025-01-02")`, poi `d.month`, `d.weekday()`, `d < date(2025, 2, 1)`.
+
 ## In arrivo
 
-- es04 · Dataclass: una `Transaction` tipizzata con validazione
 - es05 · Scrivere output: report mensile in JSON e CSV, CLI con argparse
 - es06 · Mini progetto: due estratti conto in formati diversi → uno schema comune
