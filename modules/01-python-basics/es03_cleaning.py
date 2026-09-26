@@ -6,6 +6,7 @@ Ti servono: `from es01_parsing import parse_amount, parse_date`, try/except, log
 
 import logging
 
+from es01_parsing import parse_amount, parse_date
 from es02_csv import read_transactions
 
 logger = logging.getLogger(__name__)
@@ -24,7 +25,11 @@ def clean_transaction(row: dict[str, str]) -> dict[str, str | float]:
     Solleva ValueError se la data o l'importo non sono validi. Non gestisce
     l'errore: lo segnala a chi chiama.
     """
-    raise NotImplementedError("TODO es03: implementa clean_transaction")
+    row["date"] = parse_date(row["date"])
+    row["description"] = row["description"].strip()
+    row["amount"] = parse_amount(row["amount"])
+    row["category"] = (row["category"] or UNCATEGORIZED).strip()
+    return row
 
 
 def clean_transactions(rows: list[dict[str, str]]) -> list[dict[str, str | float]]:
@@ -37,7 +42,14 @@ def clean_transactions(rows: list[dict[str, str]]) -> list[dict[str, str | float
 
     Restituisce solo le righe valide, nell'ordine originale.
     """
-    raise NotImplementedError("TODO es03: implementa clean_transactions")
+    rows_cleaned = []
+    for index, row in enumerate(rows, start=2):
+        try:
+            rows_cleaned.append(clean_transaction(row=row))
+        except ValueError as e:
+            logger.warning("riga %d scartata: %s", index, e)
+            continue
+    return rows_cleaned
 
 
 if __name__ == "__main__":

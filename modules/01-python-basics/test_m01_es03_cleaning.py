@@ -23,9 +23,30 @@ def test_clean_transaction_converts_types_and_strips():
     assert cleaned["category"] == "Spesa"
 
 
-def test_clean_transaction_fills_missing_category():
-    row = {"date": "04/01/2025", "description": "Caffè al bar", "amount": "-1,20", "category": ""}
+@pytest.mark.parametrize("category", ["", "   "])
+def test_clean_transaction_fills_missing_category(category):
+    row = {
+        "date": "04/01/2025",
+        "description": "Caffè al bar",
+        "amount": "-1,20",
+        "category": category,
+    }
     assert clean_transaction(row)["category"] == UNCATEGORIZED
+
+
+def test_clean_transaction_leaves_the_input_row_untouched():
+    row = {"date": "02/01/2025", "description": "  x  ", "amount": "-64,30", "category": ""}
+    original = dict(row)
+    clean_transaction(row)
+    assert row == original
+
+
+def test_clean_transaction_leaves_the_input_row_untouched_even_on_error():
+    row = {"date": "02/01/2025", "description": "  x  ", "amount": "abc", "category": "Casa"}
+    original = dict(row)
+    with pytest.raises(ValueError):
+        clean_transaction(row)
+    assert row == original
 
 
 @pytest.mark.parametrize(
