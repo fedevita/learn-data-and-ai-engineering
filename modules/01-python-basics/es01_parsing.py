@@ -3,6 +3,8 @@
 Lancia i test con: uv run pytest modules/01-python-basics -k es01
 """
 
+from datetime import datetime
+
 
 def parse_amount(text: str) -> float:
     """Converte un importo in formato italiano in float.
@@ -15,7 +17,8 @@ def parse_amount(text: str) -> float:
 
     Solleva ValueError se il testo non è un importo valido (es. "abc", "").
     """
-    raise NotImplementedError("TODO es01: implementa parse_amount")
+    text_stripped = text.strip()
+    return float(text_stripped.replace(".", "").replace(",", "."))
 
 
 def parse_date(text: str) -> str:
@@ -27,4 +30,6 @@ def parse_date(text: str) -> str:
 
     Solleva ValueError se il formato è sbagliato o la data non esiste.
     """
-    raise NotImplementedError("TODO es01: implementa parse_date")
+    parsed = datetime.strptime(text, "%d/%m/%Y")
+    parsed_iso = parsed.strftime("%Y-%m-%d")
+    return parsed_iso
