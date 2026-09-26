@@ -5,7 +5,7 @@ Suggerimento: ti servono il modulo `csv` e `parse_amount` da es01_parsing.
 """
 
 from pathlib import Path
-
+import csv
 
 def read_transactions(path: str | Path) -> list[dict[str, str]]:
     """Legge un CSV di transazioni e restituisce una lista di dizionari, uno per riga.
@@ -13,7 +13,11 @@ def read_transactions(path: str | Path) -> list[dict[str, str]]:
     Le chiavi sono le intestazioni del file (date, description, amount, category).
     I valori restano stringhe: nessuna conversione qui.
     """
-    raise NotImplementedError("TODO es02: implementa read_transactions")
+    with open(path, encoding="utf-8", newline="") as f:
+      reader = csv.DictReader(f)
+      rows = list(reader)
+      return rows
+      
 
 
 def total_by_category(transactions: list[dict[str, str]]) -> dict[str, float]:
