@@ -25,11 +25,12 @@ def clean_transaction(row: dict[str, str]) -> dict[str, str | float]:
     Solleva ValueError se la data o l'importo non sono validi. Non gestisce
     l'errore: lo segnala a chi chiama.
     """
-    row["date"] = parse_date(row["date"])
-    row["description"] = row["description"].strip()
-    row["amount"] = parse_amount(row["amount"])
-    row["category"] = (row["category"] or UNCATEGORIZED).strip()
-    return row
+    result = {}
+    result["date"] = parse_date(row["date"])
+    result["description"] = row["description"].strip()
+    result["amount"] = parse_amount(row["amount"])
+    result["category"] = row["category"].strip() or UNCATEGORIZED
+    return result
 
 
 def clean_transactions(rows: list[dict[str, str]]) -> list[dict[str, str | float]]:
@@ -43,12 +44,11 @@ def clean_transactions(rows: list[dict[str, str]]) -> list[dict[str, str | float
     Restituisce solo le righe valide, nell'ordine originale.
     """
     rows_cleaned = []
-    for index, row in enumerate(rows, start=2):
+    for line_no, row in enumerate(rows, start=2):
         try:
-            rows_cleaned.append(clean_transaction(row=row))
+            rows_cleaned.append(clean_transaction(row))
         except ValueError as e:
-            logger.warning("riga %d scartata: %s", index, e)
-            continue
+            logger.warning("riga %d scartata: %s", line_no, e)
     return rows_cleaned
 
 
