@@ -14,7 +14,7 @@ Legenda: `[ ]` da fare · `[~]` in corso · `[x]` fatto
 ### M01 · Python per i dati (6-8 sessioni)
 - [ ] Schede Python 01-04 (docs/python) lette e provate
 - [x] es01 · Stringhe, funzioni, eccezioni: parsing di importi e date italiane (2026-09-26)
-- [ ] es02 · Liste e dizionari: leggere un CSV e sommare per categoria
+- [x] es02 · Liste e dizionari: leggere un CSV e sommare per categoria (2026-09-26)
 - [ ] es03 · Gestione errori e logging: righe malformate
 - [ ] es04 · Dataclass: una `Transaction` con validazione
 - [ ] es05 · Scrivere output: report mensile in JSON e CSV, CLI con argparse

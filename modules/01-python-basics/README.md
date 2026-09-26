@@ -108,9 +108,44 @@ if __name__ == "__main__":
 Attenzione ai float: `0.1 + 0.2` non fa esattamente `0.3`. Per questo i test confrontano con
 `pytest.approx`. In M04 vedremo perché i database usano `DECIMAL` per i soldi.
 
+## es03 · Righe malformate: errori e logging (45-60 min)
+
+Il file `data/samples/transactions_messy.csv` è come arrivano i dati veri. Aprilo e trova a occhio
+i problemi prima di scrivere codice: date impossibili, importi vuoti o non numerici, una data nel
+formato sbagliato, spazi, una categoria mancante. Una pipeline non deve esplodere alla prima riga
+sbagliata, ma neanche ignorarla in silenzio: la salta e lo dice.
+
+Da completare in `es03_cleaning.py`:
+
+- `clean_transaction(row)` · converte una riga (data ISO, importo float, spazi via, categoria
+  vuota → `UNCATEGORIZED`). Se non può, solleva `ValueError`. Non gestisce l'errore: lo segnala.
+- `clean_transactions(rows)` · scorre le righe, chiama la prima dentro un `try/except`, salta le
+  righe non valide con un `logger.warning(...)` e restituisce solo quelle valide.
+
+Perché due funzioni: chi converte non sa cosa vorrebbe fare chi la chiama con una riga sbagliata
+(saltarla, fermarsi, metterla da parte). Sollevare l'eccezione lascia la decisione a chi orchestra.
+È lo schema di ogni pipeline: funzioni "pure" che sollevano, e un livello sopra che decide.
+
+Concetti che servono (schede 06 e 07):
+
+- **`try/except` nel ciclo:** cattura solo `ValueError`, con `as e` per avere il motivo. Cosa
+  succederebbe catturando `Exception`? Prova: scrivi `row["amont"]` per sbaglio e guarda come
+  falliscono i test. È il motivo per cui non si cattura mai tutto.
+- **`enumerate(rows, start=2)`** per avere il numero di riga come lo vede l'editor (la riga 1 è
+  l'intestazione). Chi legge il log deve poter aprire il file e andare dritto alla riga.
+- **Logging:** `logger = logging.getLogger(__name__)` in cima al file, poi
+  `logger.warning("riga %d scartata: %s", line_no, e)`. Il logging formatta con `%d`/`%s` solo se
+  il messaggio viene davvero emesso; una f-string funziona lo stesso, ma questa è la convenzione.
+  Livelli: `debug` < `info` < `warning` < `error`. Senza configurazione i warning finiscono
+  comunque sullo schermo; `logging.basicConfig(...)` nella zona prove decide formato e livello.
+  Riferimento: https://docs.python.org/it/3/howto/logging.html
+- **Nei test, la fixture `caplog`** di pytest cattura i messaggi di log: leggi come il test li
+  controlla (`caplog.records`, `getMessage()`).
+- **Il tipo `dict[str, str | float]`** è scomodo: `row["amount"]` è float o stringa? Dipende da
+  quale funzione l'ha prodotta. È il problema che risolve la dataclass di es04.
+
 ## In arrivo
 
-- es03 · Gestione errori e logging: righe malformate da saltare e riportare
 - es04 · Dataclass: una `Transaction` tipizzata con validazione
 - es05 · Scrivere output: report mensile in JSON e CSV, CLI con argparse
 - es06 · Mini progetto: due estratti conto in formati diversi → uno schema comune

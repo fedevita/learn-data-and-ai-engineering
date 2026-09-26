@@ -17,6 +17,8 @@ testpaths = ["modules"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# le schede in docs/ hanno commenti allineati a mano nei blocchi di codice
+extend-exclude = ["docs"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
