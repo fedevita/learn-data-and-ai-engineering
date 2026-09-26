@@ -25,12 +25,12 @@ def clean_transaction(row: dict[str, str]) -> dict[str, str | float]:
     Solleva ValueError se la data o l'importo non sono validi. Non gestisce
     l'errore: lo segnala a chi chiama.
     """
-    result = {}
-    result["date"] = parse_date(row["date"])
-    result["description"] = row["description"].strip()
-    result["amount"] = parse_amount(row["amount"])
-    result["category"] = row["category"].strip() or UNCATEGORIZED
-    return result
+    return {
+        "date": parse_date(row["date"]),
+        "description": row["description"].strip(),
+        "amount": parse_amount(row["amount"]),
+        "category": row["category"].strip() or UNCATEGORIZED,
+    }
 
 
 def clean_transactions(rows: list[dict[str, str]]) -> list[dict[str, str | float]]:
