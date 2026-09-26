@@ -9,4 +9,4 @@ def greet(name: str) -> str:
 
     Esempio: greet("Anna") -> "Ciao, Anna!"
     """
-    raise NotImplementedError("TODO es00: implementa greet")
+    return f"Ciao, {name}!"
