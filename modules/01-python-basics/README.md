@@ -6,16 +6,16 @@ nostro progetto: transazioni bancarie in formato italiano.
 
 ## Prima di iniziare
 
-Se Python è nuovo per te, leggi (o rileggi) dal tutorial ufficiale in italiano
-https://docs.python.org/it/3/tutorial/ i capitoli:
+Le basi del linguaggio sono nelle schede in [docs/python](../../docs/python/README.md): brevi,
+in italiano, con esempi da provare nel REPL o in `playground/prove.py`.
 
-- 3 · Un'introduzione informale a Python (numeri, stringhe, liste)
-- 4 · Altri strumenti per il controllo del flusso (`if`, `for`, definire funzioni)
-- 5 · Strutture dati (liste, dizionari)
-- 8 · Errori ed eccezioni
+- Prima di es02: schede 01 (come esplorare un oggetto), 02 (tipi base), 03 (liste),
+  04 (dizionari).
+- Prima di es03: schede 06 (errori) e 07 (moduli e file).
+- Scheda 05 (funzioni) quando vuoi capire meglio quello che stai già scrivendo.
 
-Non serve impararli a memoria: leggi, poi torna qui e usa il tutorial come riferimento mentre
-fai gli esercizi.
+Il tutorial ufficiale in italiano (https://docs.python.org/it/3/tutorial/) resta il riferimento
+completo se una scheda non basta.
 
 ## Come lavorare
 
@@ -94,6 +94,16 @@ Concetti che servono:
 - **Accumulare in un dizionario:** `totals[cat] = totals.get(cat, 0.0) + amount`. Il `.get`
   con default evita il `KeyError` la prima volta che incontri una categoria.
 - **`Path`:** il test passa il percorso come `pathlib.Path`; `open` lo accetta direttamente.
+
+Per provare a mano, aggiungi in fondo al file una zona prove (gira solo se lanci il file con ▶,
+non nei test):
+
+```python
+if __name__ == "__main__":
+    rows = read_transactions("data/samples/transactions_simple.csv")
+    for category, total in total_by_category(rows).items():
+        print(f"{category:<12} {total:>10.2f}")
+```
 
 Attenzione ai float: `0.1 + 0.2` non fa esattamente `0.3`. Per questo i test confrontano con
 `pytest.approx`. In M04 vedremo perché i database usano `DECIMAL` per i soldi.

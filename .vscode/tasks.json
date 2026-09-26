@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "test: tutto",
+      "type": "shell",
+      "command": "uv run pytest",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "test: file corrente",
+      "type": "shell",
+      "command": "uv run pytest \"${file}\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "python: file corrente",
+      "type": "shell",
+      "command": "uv run python \"${file}\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "ruff: check + format",
+      "type": "shell",
+      "command": "uv run ruff check .; uv run ruff format .",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    }
+  ]
+}

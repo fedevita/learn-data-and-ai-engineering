@@ -36,6 +36,14 @@ uv run ruff check .; if ($?) { uv run ruff format . }; if ($?) { git add -A }; i
 
 Con PowerShell 7 o Git Bash il `&&` funziona come su Linux e macOS.
 
+## Strumenti e riferimenti
+
+- [docs/vscode.md](docs/vscode.md) · VS Code già configurato: Test Explorer, bottone ▶,
+  debugger con breakpoint, task. Con un esercizio da 10 minuti per provare il debugger.
+- [docs/python](docs/python/README.md) · le schede sul linguaggio: come esplorare un oggetto,
+  tipi, liste, dizionari, funzioni, errori, file e libreria standard.
+- `playground/prove.py` · il tuo quaderno degli esperimenti: scrivi, lancia, cancella.
+
 ## Convenzioni
 
 - Prosa (README, spiegazioni) in italiano. Codice (nomi di file, funzioni, variabili) in inglese,

@@ -9,8 +9,10 @@ Legenda: `[ ]` da fare · `[~]` in corso · `[x]` fatto
 
 ### M00 · Ambiente di lavoro (1 sessione)
 - [x] es00 · uv, pytest, ruff e il primo commit (2026-09-26)
+- [ ] es00-bis · VS Code: breakpoint e debug di un test (docs/vscode.md)
 
 ### M01 · Python per i dati (6-8 sessioni)
+- [ ] Schede Python 01-04 (docs/python) lette e provate
 - [x] es01 · Stringhe, funzioni, eccezioni: parsing di importi e date italiane (2026-09-26)
 - [ ] es02 · Liste e dizionari: leggere un CSV e sommare per categoria
 - [ ] es03 · Gestione errori e logging: righe malformate

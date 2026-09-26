@@ -14,3 +14,9 @@ Claude fa il mentor, non lo sviluppatore.
 - Prosa in italiano, codice in inglese. Un file esercizio e un file di test per esercizio,
   nomi unici in tutta la repo (i test usano la modalità di import predefinita di pytest).
 - Comandi: `uv sync`, `uv run pytest`, `uv run ruff check .`, `uv run ruff format .`.
+- Le basi del linguaggio stanno nelle schede `docs/python/`; la guida a VS Code in
+  `docs/vscode.md`. Se un esercizio richiede un concetto non coperto, aggiungi una scheda o una
+  sezione invece di spiegarlo solo in chat. Prima il "come lo scopro da solo", poi il riassunto.
+- Quando crei un nuovo modulo aggiungi la sua cartella a `python.analysis.extraPaths` in
+  `.vscode/settings.json`, e ricorda la "zona prove" `if __name__ == "__main__":` in fondo agli
+  esercizi.

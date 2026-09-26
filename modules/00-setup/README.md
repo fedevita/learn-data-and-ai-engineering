@@ -47,6 +47,13 @@ uv run ruff check .; if ($?) { uv run ruff format . }; if ($?) { git add -A }; i
 
 Poi apri Claude e scrivi `review m00/es00`.
 
+## es00-bis · VS Code e il debugger (10 min)
+
+La cartella `.vscode/` configura tutto: interprete, Test Explorer (l'icona a provetta), bottone
+▶ per eseguire un file, debugger, task. La guida è [docs/vscode.md](../../docs/vscode.md): leggila
+e fai l'esercizio in fondo, che ti fa mettere un breakpoint dentro `parse_amount` e guardare cosa
+arriva davvero alla funzione.
+
 ## Per approfondire
 
 - Tutorial ufficiale di Python in italiano: https://docs.python.org/it/3/tutorial/
