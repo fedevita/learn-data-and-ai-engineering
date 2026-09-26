@@ -36,6 +36,13 @@ uv run ruff check .
 uv run ruff format .
 git add -A
 git commit -m "m00/es00: primo test verde"
+git push
+```
+
+Su Windows PowerShell 5.1 lanciali uno alla volta, oppure in un colpo solo:
+
+```powershell
+uv run ruff check .; if ($?) { uv run ruff format . }; if ($?) { git add -A }; if ($?) { git commit -m "m00/es00: primo test verde" }; if ($?) { git push }
 ```
 
 Poi apri Claude e scrivi `review m00/es00`.

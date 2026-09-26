@@ -26,6 +26,16 @@ uv run ruff check .                      # controllo qualità del codice
 uv run ruff format .                     # formattazione automatica
 ```
 
+**Windows / PowerShell 5.1:** il concatenatore `&&` non esiste. Lancia i comandi uno alla
+volta (consigliato: impari a leggere l'output di ciascuno), oppure incatenali così, che si
+ferma al primo errore:
+
+```powershell
+uv run ruff check .; if ($?) { uv run ruff format . }; if ($?) { git add -A }; if ($?) { git commit -m "m01/es01: parsing" }; if ($?) { git push }
+```
+
+Con PowerShell 7 o Git Bash il `&&` funziona come su Linux e macOS.
+
 ## Convenzioni
 
 - Prosa (README, spiegazioni) in italiano. Codice (nomi di file, funzioni, variabili) in inglese,

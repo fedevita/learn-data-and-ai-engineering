@@ -21,8 +21,12 @@ fai gli esercizi.
 
 ```bash
 uv run pytest modules/01-python-basics -k es01   # test di un esercizio
-uv run ruff check . && uv run ruff format .      # prima del commit
+uv run ruff check .                              # prima del commit
+uv run ruff format .
 ```
+
+Per il commit vale la stessa sequenza del modulo 00 (in PowerShell 5.1 senza `&&`, vedi il
+README principale).
 
 Ogni esercizio ha un file `esNN_nome.py` con le funzioni da completare (sono lì, sollevano
 `NotImplementedError`) e un file `test_m01_esNN_nome.py` che descrive il comportamento atteso.

@@ -8,10 +8,10 @@ Legenda: `[ ]` da fare · `[~]` in corso · `[x]` fatto
 ## Fase 1 — Fondamenta (circa 3 mesi)
 
 ### M00 · Ambiente di lavoro (1 sessione)
-- [ ] es00 · uv, pytest, ruff e il primo commit
+- [x] es00 · uv, pytest, ruff e il primo commit (2026-09-26)
 
 ### M01 · Python per i dati (6-8 sessioni)
-- [ ] es01 · Stringhe, funzioni, eccezioni: parsing di importi e date italiane
+- [x] es01 · Stringhe, funzioni, eccezioni: parsing di importi e date italiane (2026-09-26)
 - [ ] es02 · Liste e dizionari: leggere un CSV e sommare per categoria
 - [ ] es03 · Gestione errori e logging: righe malformate
 - [ ] es04 · Dataclass: una `Transaction` con validazione
