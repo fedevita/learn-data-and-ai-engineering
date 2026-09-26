@@ -1,0 +1,22 @@
+[project]
+name = "learn-data-and-ai-engineering"
+version = "0.1.0"
+description = "Percorso pratico per diventare data & AI engineer"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["modules"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
