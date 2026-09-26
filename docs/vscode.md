@@ -3,10 +3,26 @@
 Tutto è già configurato nella cartella `.vscode/` del progetto. Questa guida spiega cosa c'è e
 come usarlo. In fondo trovi un esercizio da 10 minuti per provare il debugger.
 
+## Il profilo «Python»
+
+VS Code ha i *profili*: insiemi separati di estensioni e impostazioni. Questa cartella è associata
+al profilo **Python**, che contiene solo quello che serve qui: Python, Pylance, Python Debugger,
+Ruff, Rainbow CSV (colora le colonne dei file CSV), Material Icon Theme e Claude Code. Le
+estensioni di lavoro (SQL Server, Jira, SSH, Docker...) restano nel profilo **Default**, che
+VS Code continua a usare per le altre cartelle.
+
+- Quale profilo è attivo: ingranaggio in basso a sinistra → "Profiles" (quello attivo ha la
+  spunta). Da lì si cambia profilo, se serve.
+- VS Code ricorda l'associazione: `code .` in questa cartella riapre il profilo Python. Se per
+  qualche motivo si apre con Default: `code --profile Python .`
+- Ogni profilo ha le sue impostazioni utente (tema, icone, scorciatoie per i commenti, copiate
+  dal Default). Le impostazioni del progetto stanno in `.vscode/settings.json` e valgono per
+  tutti i profili.
+
 ## Prima volta
 
-1. Apri la cartella del progetto (`code .`). VS Code propone di installare le estensioni
-   consigliate (Python, Python Debugger, Pylance, Ruff). Accetta.
+1. Apri la cartella del progetto (`code .`). Se VS Code propone di installare le estensioni
+   consigliate, accetta (nel profilo Python sono già installate).
 2. In basso a destra deve comparire l'interprete del progetto, tipo `3.12.6 ('.venv': venv)`.
    Se non c'è: `Ctrl+Shift+P` → "Python: Select Interpreter" → scegli `.venv\Scripts\python.exe`.
 3. Da ora, salvando un file `.py`, Ruff lo formatta da solo. Non serve più `ruff format` a mano.
@@ -75,7 +91,7 @@ direttamente `ruff: check + format`. Sono definiti in `.vscode/tasks.json`.
 | `F12` / `Alt+←` | vai alla definizione / torna indietro |
 | `Ctrl+Spazio` | suggerimenti (metodi, nomi) |
 | `F2` | rinomina un nome ovunque è usato |
-| `Ctrl+/` | commenta / decommenta la riga |
+| `Ctrl+7` | commenta / decommenta la riga (tastiera italiana: è la tua scorciatoia personalizzata) |
 | `Shift+Alt+F` | formatta il file (Ruff) |
 
 ## es00-bis · Prova il debugger (10 min)
